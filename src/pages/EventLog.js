@@ -10,5 +10,5 @@ const EventLog = () => {
       </Container>
     );
   };
-  
+
   export default EventLog;

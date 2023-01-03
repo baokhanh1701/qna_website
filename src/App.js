@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import EventLog from './pages/EventLog';
 
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 import './App.css';
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/eventlog" element={<EventLog />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
