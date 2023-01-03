@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import { Routes, Route } from "react-router-dom";
+import AboutPage from "./pages/AboutPage";
+import HomePage from "./pages/HomePage";
+import EventLog from './pages/EventLog';
+
+import Header from "./components/Header";
+
 import './App.css';
 
 function App() {
+  //* FOR LOADING */
+  setTimeout(() => {
+    document.body.setAttribute("class", "loaded");
+  }, 1500);
+
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+      </div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/eventlog" element={<EventLog />} />
+      </Routes>
     </div>
   );
 }
