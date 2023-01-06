@@ -1,25 +1,29 @@
 import { Container, Text, Grid, Card, Row } from "@nextui-org/react";
-
+import AboutAbout from "../components/About_About";
+import OverviewAbout from "../components/Overview_About";
+import ContactAbout from "../components/Contact_About";
 const AboutPage = () => {
     const DevList = [
         {
             name: "Nguyen Kieu Bao Khanh",
-            img: "../img/Nguyễn Kiều Bảo Khánh.jpg",
+            img: "/img/Einkaufswagen_(24140951728).jpg",
             describe: "Nguyen Kieu Bao Khanh",
         },
         {
             name: "Pham Tri Nhan",
-            img: "../img/Nguyễn Kiều Bảo Khánh.jpg",
+            img: "/img/Nguyễn Kiều Bảo Khánh.jpg",
             describe: "Pham Tri Nhan",
         }
     ]
     return (
         <div>
+
             <Container>
                 <Text h1> About Us </Text>
                 <Text p>This is about us, two university students who so tired of HCMUT and decided to make this small web-app.</Text>
             </Container>
-
+            <OverviewAbout />
+            <AboutAbout />
             <Grid.Container gap={2} justify="flex-start">
                 {DevList.map((item, index) => (
                     <Grid md={3} sm={4} xs={6} key={index}>
@@ -45,6 +49,7 @@ const AboutPage = () => {
                     </Grid>
                 ))}
             </Grid.Container>
+            <ContactAbout />
         </div>
     )
 };
