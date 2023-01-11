@@ -1,36 +1,33 @@
-import { Link } from "react-router-dom";
-import { Navbar, Text, Button } from "@nextui-org/react";
-
 const Footer = () => {
     return (
-        <footer class="bg-dark text-center text-white" id="footer">
-            <div class="container p-4">
-                <section class="mb-4">
-                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
-                        class="fab fa-facebook-f"></i></a>
+        <footer className="bg-dark text-center text-white" id="footer">
+            <div className="container p-4">
+                <section className="mb-4">
+                    <a className="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        className="fab fa-facebook-f"></i></a>
 
-                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
-                        class="fab fa-linkedin-in"></i></a>
+                    <a className="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        className="fab fa-linkedin-in"></i></a>
 
-                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a>
+                    <a className="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i className="fab fa-github"></i></a>
                 </section>
-                <section class="">
-                    <form action="">
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-auto">
-                                <p class="pt-2">
+                <section className="">
+                    <form className="">
+                        <div className="row d-flex justify-content-center">
+                            <div className="col-auto">
+                                <p className="pt-2">
                                     <strong>Sign up for our newsletter</strong>
                                 </p>
                             </div>
-                            <div class="col-md-5 col-12">
-                                <div class="form-outline form-white mb-4">
-                                    <input type="email" id="form5Example21" class="form-control" />
-                                    <label class="form-label" for="form5Example21">Your email address</label>
+                            <div className="col-md-5 col-12">
+                                <div className="form-outline form-white mb-4">
+                                    <input type="email" id="form5Example21" className="form-control" />
+                                    <label className="form-label">Your email address</label>
                                 </div>
                             </div>
 
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-outline-light mb-4">
+                            <div className="col-auto">
+                                <button type="submit" className="btn btn-outline-light mb-4">
                                     Subscribe
                                 </button>
                             </div>

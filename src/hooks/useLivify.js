@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useGetEvents, useGetSingleEvent } from '../api/eventService';
+import { getEvents, getSingleEvent } from '../api/eventService';
 
-export const useGetWholeEvents = () => {
+export const useGetAllEvents = () => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setLoading(true);
-        useGetEvents()
-            .then((results) => setEvents(results))
+        getEvents().then((results) => setEvents(results))
             .finally(() => {
                 setLoading(false);
             });
@@ -16,6 +15,24 @@ export const useGetWholeEvents = () => {
 
     return {
         events,
+        loading,
+    }
+}
+
+export const useGetOneEvent = (event_id) => {
+    const [event, setEvent] = useState([]);
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        setLoading(true);
+        getSingleEvent(event_id).then((res) => {
+            setEvent(res);
+        }).finally(() => {
+            setLoading(false);
+        })
+    })
+
+    return {
+        event,
         loading,
     }
 }

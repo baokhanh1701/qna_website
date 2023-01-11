@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Navbar, Text, Button } from "@nextui-org/react";
 
-const Header = () => {
+const Header = () => { 
     return (
         <Navbar isBordered variant="sticky">
             <Navbar.Brand>
@@ -10,20 +10,28 @@ const Header = () => {
                 </Text>
             </Navbar.Brand>
             <Navbar.Content>
-                <Navbar.Link>
-                    <Link to="/">Home</Link>
-                </Navbar.Link>
-                <Navbar.Link>
-                    <Link to="/eventlog">Event Log</Link>
-                </Navbar.Link>
-                <Navbar.Link>
-                    <Link to="/about">About</Link>
-                </Navbar.Link>
+                <Navbar.Link href="/#"> Dashboard </Navbar.Link>
+                <Navbar.Link href="/eventlog"> Event Log </Navbar.Link>
+                <Navbar.Link href="/about"> About </Navbar.Link>
             </Navbar.Content>
             <Navbar.Content>
                 <Navbar.Item>
-                    <Button auto flat as={Link} href="#">
-                        Login with Google
+                    <Navbar.Link href="/login">
+                        Login
+                    </Navbar.Link>
+                </Navbar.Item>
+                <Navbar.Item>
+                    <Button auto flat as={Link}>
+                        <Navbar.Link href="/signup">
+                            Sign Up    
+                        </Navbar.Link> 
+                    </Button>
+                </Navbar.Item>
+                <Navbar.Item>
+                    <Button auto flat as={Link} className="hidden">
+                        <Navbar.Link href="/signup">
+                            Sign Out    
+                        </Navbar.Link> 
                     </Button>
                 </Navbar.Item>
             </Navbar.Content>

@@ -4,14 +4,14 @@ export const API_URL = axios.create({
     baseURL: "https://63b3df865901da0ab3893ffb.mockapi.io/api/v1",
 });
 
-export const useGetEvents = async () => {
+export const getEvents = async () => {
     const { data } = await API_URL.get(
-        `/eventname`
+        '/eventname'
     );
-    return data.results;
+    return data;
 }
 
-export const useGetSingleEvent = async (event_id) => {
+export const getSingleEvent = async (event_id) => {
     const { data } = await API_URL.get(
         `/eventname/${event_id}`
     );
