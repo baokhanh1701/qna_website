@@ -1,43 +1,59 @@
+import React from "react";
+import { useNavigate } from "react-router";
 import { Grid, Card, Col, Row, Button, Text } from "@nextui-org/react";
 
 const EventItem = (props) => {
     const { eventData } = props;
+    const navigate = useNavigate();
     const EventCard = ({ eventData }) => {
         return (
-            <Card css={{ w: "100%", h: "400px" }}>
+            <Card isHoverable isPressable css={{ w: "auto", h: "400px" }}>
                 <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
                     <Col>
-                        <Text size={12} weight="bold" transform="uppercase" color="#ffffffAA">
-                            {eventData.isLive ? "Online" : "Offline"}
+                        <Text
+                            size={12}
+                            weight="bold"
+                            transform="uppercase"
+                            color="#ffffffAA"
+                            css={{ color: eventData.isLive ? "$green500" : "$red600" }}
+                        >
+                            {eventData.isLive ? "⦿ Online" : "⦿ Offline"}
                         </Text>
-                        <Text h3 color="black">
+                        <Text h3 color="white">
                             {eventData.name}
                         </Text>
                     </Col>
                 </Card.Header>
-                {/* <Card.Body css={{ p: 0 }}>
+                <Card.Body
+                    css={{ p: 0 }}>
                     <Card.Image
-                        src={`https://picsum.photos/400/500`}
+                        src={`${eventData.img}`}
                         objectFit="cover"
                         width="100%"
                         height="100%"
                         alt={eventData.name}
+                        css={{
+                            filter: "blur(5px)"
+                        }}
                     />
-                </Card.Body> */}
+                </Card.Body>
                 <Card.Footer
                     isBlurred
                     css={{
                         position: "absolute",
-                        bgBlur: "#ffffff66",
+                        bgBlur: "#ffffff90",
                         borderTop: "$borderWeights$light solid rgba(255, 255, 255, 0.2)",
                         bottom: 0,
-                        zIndex: 1,
+                        zIndex: 1
                     }}
                 >
                     <Row>
                         <Col>
-                            <Text color="#000" size={12}> Available Soon. </Text>
-                            <Text color="#000" size={12}> Get notified. </Text>
+                            <Text color="black" size={16}> {eventData.date.slice(0, 10)} </Text>
+                            <Text
+                                weight="bold"
+                                color="black"
+                                size={14}> {eventData.host} </Text>
                         </Col>
                         <Col>
                             <Row justify="flex-end">

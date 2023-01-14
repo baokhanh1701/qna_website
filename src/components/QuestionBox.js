@@ -1,10 +1,10 @@
 import React from "react";
 import { Container, Text, Spacer, Card, Grid } from "@nextui-org/react";
 import { useGetQnA } from "../hooks/useLivify";
-import questions from "../api/eventAPI_event-qna.json";
+// import questions from "../api/eventAPI_event-qna.json";
 
 const QuestionBox = () => {
-
+    const { questions } = useGetQnA();
     const EventQuestionMiniCard = ({ name, isAttendee, question }) => {
         return (
             // {
@@ -13,8 +13,11 @@ const QuestionBox = () => {
             //     "question": "Quis corrupti alias natus sed consectetur. Doloribus excepturi accusamus doloremque porro maxime labore delectus aspernatur. Officia cupiditate veritatis. Fuga cupiditate officiis vel modi numquam delectus cumque vero porro. Recusandae necessitatibus magni autem at error doloremque voluptatum nulla odit. Consequatur ex nesciunt ipsam harum eligendi necessitatibus iure quas temporibus.",
             //     "id": "1"
             // }
-            <Card isHoverable css={{ p: "$1", mw: "700px", m: "$5" }
-            }>
+            <Card isHoverable isPressable css={{
+                p: "$1",
+                mw: "700px",
+                m: "$5"
+            }}>
                 <Card.Header>
                     <img
                         alt="nextui logo"
@@ -29,7 +32,11 @@ const QuestionBox = () => {
                             </Text>
                         </Grid>
                         <Grid xs={10}>
-                            <Text css={{ color: "$accents8" }}> {isAttendee ? "@Attendee" : "@Organizer"} </Text>
+                            <Text css={{
+                                color: isAttendee ? "$accents8" : "$red600"
+                            }}>
+                                {isAttendee ? "@Attendee" : "@Organizer"}
+                            </Text>
                         </Grid>
                     </Grid.Container>
                 </Card.Header>

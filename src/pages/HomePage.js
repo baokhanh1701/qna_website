@@ -62,7 +62,7 @@ const HomePage = () => {
                     color="primary"
                     labelPlaceholder="Question"
                     size="xl"
-                    width="60%"
+                    width="50%"
                 />
                 <QuestionBox />
             </Container>

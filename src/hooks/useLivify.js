@@ -38,12 +38,27 @@ export const useGetOneEvent = (event_id) => {
 }
 
 export const useGetQnA = () => {
-    const [question, setQuestion] = useState([]);
+    // const [questions, setQuestions] = useState([]);
+    // useEffect(() => {
+    //     getQuestionDatabase().then((res) => {
+    //         setQuestions(res);
+    //         console.log(questions);
+    //     })
+    // }, [])
+    // return questions;
+    const [questions, setQuestions] = useState([]);
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
-        getQuestionDatabase().then((res) => {
-            setQuestion(res);
-            console.log(question);
-        })
-    }, [])
-    return question;
+        setLoading(true);
+        getQuestionDatabase().then((results) => setQuestions(results))
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
+    return {
+        questions,
+        loading,
+    }
 }

@@ -8,7 +8,7 @@ const EventLog = () => {
   return (
     <Container>
       <Spacer />
-      <Text h1> Event Log </Text>
+      <Text h1> Events Database </Text>
       <Text p>
         You can see the upcoming events here.
       </Text>
@@ -16,7 +16,7 @@ const EventLog = () => {
       <Grid.Container
         gap={2}
         css={{
-          padding: "2rem 0",
+          padding: "2rem 2rem",
         }}
       >
         {events.map((event) => (
