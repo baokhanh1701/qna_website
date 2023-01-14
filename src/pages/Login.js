@@ -3,7 +3,7 @@ import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 
 import { auth } from '../api/firebase';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { userContext } from '../App';
-import { Button } from '@nextui-org/react';
+import { Button, Container } from '@nextui-org/react';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -19,7 +19,6 @@ const Login = () => {
                 const user = userCredential.user;
                 console.log(user);
                 setShowButton(false);
-                console.log(showButton);
                 navigate("/");
             })
             .catch((error) => {
@@ -33,7 +32,7 @@ const Login = () => {
 
     const provider = new GoogleAuthProvider();
 
-    const signInWithGoogle = (e) => {
+    const signInWithGoogle = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
@@ -42,8 +41,8 @@ const Login = () => {
                 // The signed-in user info.
                 const user = result.user;
                 // ...
-                setShowButton(false);
                 console.log(user);
+                setShowButton(false);
                 setUserName(user.displayName);
                 console.log(showButton);
                 navigate("/");
@@ -63,7 +62,7 @@ const Login = () => {
     }
 
     return (
-        <div>
+        <Container align="center">
             <form>
                 <div>
                     <label htmlFor="email-address">
@@ -106,12 +105,10 @@ const Login = () => {
                     Sign up
                 </NavLink>
             </p>
-            <p className="text-sm text-black text-center">
-                <Button onPress={signInWithGoogle}>
-                    Sign up with google
-                </Button>
-            </p>
-        </div>
+            <Button onPress={signInWithGoogle}>
+                Sign up with google
+            </Button>
+        </Container>
     )
 }
 

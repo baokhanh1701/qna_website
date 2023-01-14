@@ -2,6 +2,7 @@ import { Container, Text, Button, Spacer, Textarea, Row, Col } from "@nextui-org
 import React, { useContext } from 'react';
 import { useNavigate } from "react-router";
 import { userContext } from "../App";
+import QuestionBox from "../components/QuestionBox"
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -24,7 +25,7 @@ const HomePage = () => {
     //     });
     // }, []);
     return (
-        <Container fluid>
+        <Container fluid align="center">
             <Spacer />
             <Text h1> Dashboard </Text>
             Welcome to Your Dashboard, {username ? username : "Guest"}!
@@ -37,40 +38,33 @@ const HomePage = () => {
                     <Row>
                         <Col>
                             <Button
-                                color="secondary"
+                                color="primary"
                                 style={{ display: showButton ? 'block' : 'none' }}
                                 onPress={() => { navigate("/login") }}>
-                                Sign in/ Sign up with email
-                            </Button>
-                        </Col>
-                        <Col>
-                            <Button
-                                color="success"
-                                style={{ display: showButton ? 'block' : 'none' }}
-                                onPress={() => { navigate("/signup") }}>
-                                Sign in/ Sign up with Google
+                                Sign in/ Sign up
                             </Button>
                         </Col>
                     </Row>
                 </Container>
-                {/* Logged In */}
-                <Container
-                    position="center"
-                    style={{ visibility: showButton ? 'visible' : 'visible' }}
-                    className="questionView">
-                    <Spacer />
-                    <Text h2> Question View </Text>
-                    <Text p> Please type your question in the textarea below. </Text>
-                    <Spacer />
-                    <Textarea
-                        borderWeight="2px"
-                        status="secondary"
-                        color="secondary"
-                        labelPlaceholder="Question"
-                        size="xl"
-                        fullWidth
-                    />
-                </Container>
+            </Container>
+            {/* Logged In */}
+            <Container
+                position="center"
+                style={{ display: showButton ? 'none' : 'block' }}
+                className="questionView">
+                <Spacer />
+                <Text h2> Question View </Text>
+                <Text p> Please type your question in the textarea below. </Text>
+                <Spacer />
+                <Textarea
+                    borderWeight="2px"
+                    status="primary"
+                    color="primary"
+                    labelPlaceholder="Question"
+                    size="xl"
+                    width="60%"
+                />
+                <QuestionBox />
             </Container>
             <Spacer />
         </Container>

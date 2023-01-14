@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getEvents, getSingleEvent } from '../api/eventService';
+import { getEvents, getSingleEvent, getQuestionDatabase } from '../api/eventService';
 
 export const useGetAllEvents = () => {
     const [events, setEvents] = useState([]);
@@ -29,10 +29,21 @@ export const useGetOneEvent = (event_id) => {
         }).finally(() => {
             setLoading(false);
         })
-    })
+    }, [])
 
     return {
         event,
         loading,
     }
+}
+
+export const useGetQnA = () => {
+    const [question, setQuestion] = useState([]);
+    useEffect(() => {
+        getQuestionDatabase().then((res) => {
+            setQuestion(res);
+            console.log(question);
+        })
+    }, [])
+    return question;
 }

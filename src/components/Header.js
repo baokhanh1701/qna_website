@@ -21,7 +21,7 @@ const Header = () => {
         <Navbar isBordered variant="sticky">
             <Navbar.Brand>
                 <Text h2>
-                    <Link to="/">Livify Q&A</Link>
+                    Livify Q&A
                 </Text>
             </Navbar.Brand>
             <Navbar.Content>
@@ -38,14 +38,14 @@ const Header = () => {
                     </Navbar.Link>
                 </Navbar.Item>
                 <Navbar.Item>
-                    <Button auto flat as={Link}
+                    <Button auto flat
                         style={{ display: showButton ? 'block' : 'none' }}
                         onPress={() => navigate("/signup")}>
                         Sign up
                     </Button>
                 </Navbar.Item>
                 <Navbar.Item>
-                    <Button auto flat as={Link}
+                    <Button auto flat
                         style={{ display: showButton ? 'none' : 'block' }}
                         onPress={handleLogout}>
                         Sign out

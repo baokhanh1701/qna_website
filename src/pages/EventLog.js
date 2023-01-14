@@ -3,20 +3,20 @@ import { useGetAllEvents } from "../hooks/useLivify";
 import EventItem  from "../components/EventItem";
 const EventLog = () => {
 
-  const { events, loading } = useGetAllEvents();
+  const { events } = useGetAllEvents();
 
   return (
     <Container>
       <Spacer />
       <Text h1> Event Log </Text>
       <Text p>
-        This is where you save your past events and their discussions.
+        You can see the upcoming events here.
       </Text>
 
       <Grid.Container
         gap={2}
         css={{
-          padding: "4rem 0",
+          padding: "2rem 0",
         }}
       >
         {events.map((event) => (
