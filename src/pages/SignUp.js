@@ -5,7 +5,6 @@ import { auth } from "../api/firebase";
 
 const SignUp = () => {
     const navigate = useNavigate();
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 

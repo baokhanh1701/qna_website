@@ -1,7 +1,22 @@
-import { Link } from "react-router-dom";
+import React, { useContext } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import { Navbar, Text, Button } from "@nextui-org/react";
+import { signOut } from "firebase/auth";
+import { auth } from "../api/firebase";
+import { userContext } from '../App';
 
-const Header = () => { 
+const Header = () => {
+    const { setUserName, showButton, setShowButton } = useContext(userContext);
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        signOut(auth).then(() => {
+            navigate("/");
+            console.log("Signed out successfully");
+            setShowButton(true);
+            setUserName("Guest");
+        }).catch((error) => console.log(error));
+    }
+
     return (
         <Navbar isBordered variant="sticky">
             <Navbar.Brand>
@@ -16,22 +31,24 @@ const Header = () => {
             </Navbar.Content>
             <Navbar.Content>
                 <Navbar.Item>
-                    <Navbar.Link href="/login">
+                    <Navbar.Link href="/login"
+                        style={{ display: showButton ? 'block' : 'none' }}
+                    >
                         Login
                     </Navbar.Link>
                 </Navbar.Item>
                 <Navbar.Item>
-                    <Button auto flat as={Link}>
-                        <Navbar.Link href="/signup">
-                            Sign Up    
-                        </Navbar.Link> 
+                    <Button auto flat as={Link}
+                        style={{ display: showButton ? 'block' : 'none' }}
+                        onPress={() => navigate("/signup")}>
+                        Sign up
                     </Button>
                 </Navbar.Item>
                 <Navbar.Item>
-                    <Button auto flat as={Link} className="hidden">
-                        <Navbar.Link href="/signup">
-                            Sign Out    
-                        </Navbar.Link> 
+                    <Button auto flat as={Link}
+                        style={{ display: showButton ? 'none' : 'block' }}
+                        onPress={handleLogout}>
+                        Sign out
                     </Button>
                 </Navbar.Item>
             </Navbar.Content>

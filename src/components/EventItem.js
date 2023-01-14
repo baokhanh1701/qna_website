@@ -15,7 +15,7 @@ const EventItem = (props) => {
                         </Text>
                     </Col>
                 </Card.Header>
-                <Card.Body css={{ p: 0 }}>
+                {/* <Card.Body css={{ p: 0 }}>
                     <Card.Image
                         src={`https://picsum.photos/400/500`}
                         objectFit="cover"
@@ -23,7 +23,7 @@ const EventItem = (props) => {
                         height="100%"
                         alt={eventData.name}
                     />
-                </Card.Body>
+                </Card.Body> */}
                 <Card.Footer
                     isBlurred
                     css={{

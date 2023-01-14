@@ -1,4 +1,4 @@
-import { Container, Grid, Text, Pagination } from "@nextui-org/react";
+import { Container, Grid, Text, Spacer } from "@nextui-org/react";
 import { useGetAllEvents } from "../hooks/useLivify";
 import EventItem  from "../components/EventItem";
 const EventLog = () => {
@@ -7,6 +7,7 @@ const EventLog = () => {
 
   return (
     <Container>
+      <Spacer />
       <Text h1> Event Log </Text>
       <Text p>
         This is where you save your past events and their discussions.

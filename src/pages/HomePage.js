@@ -1,56 +1,69 @@
-import { Container, Text, Button, Spacer, Textarea } from "@nextui-org/react";
-import React, { useEffect, useState } from 'react';
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../api/firebase"
+import { Container, Text, Button, Spacer, Textarea, Row, Col } from "@nextui-org/react";
+import React, { useContext } from 'react';
 import { useNavigate } from "react-router";
+import { userContext } from "../App";
 
 const HomePage = () => {
     const navigate = useNavigate();
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/firebase.User
-                const uid = user.uid;
-                // ...
-                navigate("/");
-                console.log("uid: ", uid)
-            } else {
-                // User is signed out
-                // ...
-                console.log("user is logged out")
-            }
-        });
+    const { username, showButton } = useContext(userContext);
 
-    }, [])
-
-    const handleLogout = () => {
-        signOut(auth).then(() => {
-            navigate("/");
-            console.log("Signed out successfully");
-        }).catch((error) => console.log(error));
-    }
-
+    // useEffect(() => {
+    //     onAuthStateChanged(auth, (user) => {
+    //         if (user) {
+    //             // User is signed in, see docs for a list of available properties
+    //             // https://firebase.google.com/docs/reference/js/firebase.User
+    //             const uid = user.uid;
+    //             // ...
+    //             navigate("/");
+    //             console.log("uid: ", uid)
+    //         } else {
+    //             // User is signed out
+    //             // ...
+    //             console.log("user is logged out")
+    //         }
+    //     });
+    // }, []);
     return (
-        <Container>
-            <Container position="center" className="dashBoard">
-                <Text h1> Dashboard </Text>
+        <Container fluid>
+            <Spacer />
+            <Text h1> Dashboard </Text>
+            Welcome to Your Dashboard, {username ? username : "Guest"}!
+            <Container
+                style={{ display: showButton ? 'block' : 'none' }}
+                className="dashBoard">
                 {/* Not Logged In */}
                 Please sign in to use our services.
-                <Container position="center">
-                    <Spacer />
-                    <Button position="center" href="/login">Login/Signup</Button>
-                    <Spacer />
+                <Container gap={0} position="center">
+                    <Row>
+                        <Col>
+                            <Button
+                                color="secondary"
+                                style={{ display: showButton ? 'block' : 'none' }}
+                                onPress={() => { navigate("/login") }}>
+                                Sign in/ Sign up with email
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                color="success"
+                                style={{ display: showButton ? 'block' : 'none' }}
+                                onPress={() => { navigate("/signup") }}>
+                                Sign in/ Sign up with Google
+                            </Button>
+                        </Col>
+                    </Row>
                 </Container>
                 {/* Logged In */}
-                <Container position="center" className="questionView">
+                <Container
+                    position="center"
+                    style={{ visibility: showButton ? 'visible' : 'visible' }}
+                    className="questionView">
                     <Spacer />
                     <Text h2> Question View </Text>
                     <Text p> Please type your question in the textarea below. </Text>
                     <Spacer />
                     <Textarea
                         borderWeight="2px"
-                        borderColor="blue"
                         status="secondary"
                         color="secondary"
                         labelPlaceholder="Question"
