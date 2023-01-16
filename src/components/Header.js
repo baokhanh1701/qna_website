@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Navbar, Text, Button } from "@nextui-org/react";
 import { signOut } from "firebase/auth";
 import { auth } from "../api/firebase";
 import { userContext } from '../App';
 
 const Header = () => {
-    const { setUserName, showButton, setShowButton } = useContext(userContext);
+    const { setUserName, showButton, setShowButton, setUserLoggedIn } = useContext(userContext);
     const navigate = useNavigate();
     const handleLogout = () => {
         signOut(auth).then(() => {
@@ -14,6 +14,9 @@ const Header = () => {
             console.log("Signed out successfully");
             setShowButton(true);
             setUserName("Guest");
+
+            setUserLoggedIn(null);
+            localStorage.clear();
         }).catch((error) => console.log(error));
     }
 
@@ -26,7 +29,10 @@ const Header = () => {
             </Navbar.Brand>
             <Navbar.Content>
                 <Navbar.Link href="/#"> Dashboard </Navbar.Link>
-                <Navbar.Link href="/eventlog"> Event Log </Navbar.Link>
+                <Navbar.Link
+                    href="/eventlog"
+                    style={{ display: showButton ? 'none' : 'block' }}
+                > Event Log </Navbar.Link>
                 <Navbar.Link href="/about"> About </Navbar.Link>
             </Navbar.Content>
             <Navbar.Content>

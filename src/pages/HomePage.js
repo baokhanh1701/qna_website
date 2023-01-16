@@ -1,13 +1,13 @@
-import { Container, Text, Button, Spacer, Textarea, Row, Col } from "@nextui-org/react";
-import React, { useContext } from 'react';
+import { Container, Text, Button, Spacer, Textarea, Row, Col, Checkbox } from "@nextui-org/react";
+import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router";
 import { userContext } from "../App";
 import QuestionBox from "../components/QuestionBox"
+import { usePostQnA } from "../hooks/useLivify";
 
 const HomePage = () => {
     const navigate = useNavigate();
     const { username, showButton } = useContext(userContext);
-
     // useEffect(() => {
     //     onAuthStateChanged(auth, (user) => {
     //         if (user) {
@@ -24,11 +24,13 @@ const HomePage = () => {
     //         }
     //     });
     // }, []);
+    const [question, setQuestion] = useState("");
+
     return (
         <Container fluid align="center">
             <Spacer />
-            <Text h1> Dashboard </Text>
-            Welcome to Your Dashboard, {username ? username : "Guest"}!
+            <Text h1> Home </Text>
+            Welcome to your Dashboard!
             <Container
                 style={{ display: showButton ? 'block' : 'none' }}
                 className="dashBoard">
@@ -56,14 +58,27 @@ const HomePage = () => {
                 <Text h2> Question View </Text>
                 <Text p> Please type your question in the textarea below. </Text>
                 <Spacer />
-                <Textarea
-                    borderWeight="2px"
-                    status="primary"
-                    color="primary"
-                    labelPlaceholder="Question"
-                    size="xl"
-                    width="50%"
-                />
+                <Container position="center" fluid align="center">
+                    <Textarea
+                        borderWeight="2px"
+                        status="primary"
+                        color="primary"
+                        labelPlaceholder="Question"
+                        size="xl"
+                        width="70%"
+                        onChange={(e) => {
+                            setQuestion(e.target.value);
+                        }}
+                    />
+                    <Spacer x={12} />
+                    <Checkbox color="primary" labelColor="primary" style={{ margin: "10px" }} >
+                        Ask anonymously
+                    </Checkbox>
+                    <Button color="success"
+                    >
+                        Ask!
+                    </Button>
+                </Container>
                 <QuestionBox />
             </Container>
             <Spacer />

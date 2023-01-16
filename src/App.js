@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
+import axios from "axios";
 
 import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
@@ -11,6 +12,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 import './App.css';
+import EventInfo from "./pages/EventInfo";
 
 export const userContext = createContext();
 
@@ -22,9 +24,22 @@ function App() {
 
   const [username, setUserName] = useState("Guest");
   const [showButton, setShowButton] = useState(true);
+  const [userLoggedIn, setUserLoggedIn] = useState();
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("userLoggedIn");
+    if (loggedInUser) {
+      // const foundUser = JSON.parse(loggedInUser);
+      // setUser(foundUser);
+      console.log(loggedInUser);
+      console.log(userLoggedIn);
+      setUserLoggedIn(loggedInUser);
+      setShowButton(false);
+    }
+  }, []);
 
   return (
-    <userContext.Provider value={{ username, setUserName, showButton, setShowButton }}>
+    <userContext.Provider value={{ username, setUserName, showButton, setShowButton, userLoggedIn, setUserLoggedIn }}>
       <div className="App">
         <div id="loader-wrapper">
           <div id="loader"></div>
@@ -38,6 +53,7 @@ function App() {
           <Route path="/eventlog" element={<EventLog />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/eventlog/event/:id" element={<EventInfo />} />
         </Routes>
         <Footer />
       </div>

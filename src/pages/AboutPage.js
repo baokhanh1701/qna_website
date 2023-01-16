@@ -16,14 +16,10 @@ const AboutPage = () => {
         }
     ]
     return (
-        <div>
-            <Container>
-                <Text h1> About Us </Text>
-                <Text p>This is about us, two university students who so tired of HCMUT and decided to make this small web-app.</Text>
-            </Container>
+        <div style={{ backgroundImage: "url(/public/img/caroImage.jpg)" }}>
             <OverviewAbout />
             <AboutAbout />
-            <Grid.Container gap={2} justify="flex-start">
+            {/* <Grid.Container gap={2} justify="flex-start">
                 {DevList.map((item, index) => (
                     <Grid md={3} sm={4} xs={6} key={index}>
                         <Card isPressable>
@@ -47,7 +43,7 @@ const AboutPage = () => {
                         </Card>
                     </Grid>
                 ))}
-            </Grid.Container>
+            </Grid.Container> */}
             <ContactAbout />
         </div>
     )

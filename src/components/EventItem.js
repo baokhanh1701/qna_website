@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Grid, Card, Col, Row, Button, Text } from "@nextui-org/react";
 
 const EventItem = (props) => {
@@ -7,7 +7,7 @@ const EventItem = (props) => {
     const navigate = useNavigate();
     const EventCard = ({ eventData }) => {
         return (
-            <Card isHoverable isPressable css={{ w: "auto", h: "400px" }}>
+            <Card isHoverable css={{ w: "auto", h: "400px" }}>
                 <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
                     <Col>
                         <Text
@@ -27,6 +27,7 @@ const EventItem = (props) => {
                 <Card.Body
                     css={{ p: 0 }}>
                     <Card.Image
+                        showSkeleton
                         src={`${eventData.img}`}
                         objectFit="cover"
                         width="100%"
@@ -57,7 +58,9 @@ const EventItem = (props) => {
                         </Col>
                         <Col>
                             <Row justify="flex-end">
-                                <Button flat auto rounded color="secondary">
+                                <Button flat auto rounded color="secondary" onPress={()=> {
+                                    navigate(`event/${eventData.id}`);
+                                }}>
                                     <Text
                                         css={{ color: "inherit" }}
                                         size={12}

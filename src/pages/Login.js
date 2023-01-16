@@ -9,7 +9,7 @@ const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { setUserName, showButton, setShowButton } = useContext(userContext);
+    const { setUserName, showButton, setShowButton, setUserLoggedIn } = useContext(userContext);
 
     const onLogin = (e) => {
         e.preventDefault();
@@ -19,6 +19,10 @@ const Login = () => {
                 const user = userCredential.user;
                 console.log(user);
                 setShowButton(false);
+                
+                localStorage.setItem("userLoggedIn", user);
+                setUserLoggedIn(user);
+                setUserName("User");                
                 navigate("/");
             })
             .catch((error) => {
@@ -45,6 +49,9 @@ const Login = () => {
                 setShowButton(false);
                 setUserName(user.displayName);
                 console.log(showButton);
+
+                localStorage.setItem('userLoggedIn', user);
+                setUserLoggedIn(user);
                 navigate("/");
             }).catch((error) => {
                 // Handle Errors here.
@@ -55,7 +62,7 @@ const Login = () => {
                 // The AuthCredential type that was used.
                 const credential = GoogleAuthProvider.credentialFromError(error);
                 // ...
-                console.log("User logged out due to unexpected result");
+                console.log("User logged out due to error: ", errorMessage, errorCode);
                 setUserName("Guest");
 
             })
