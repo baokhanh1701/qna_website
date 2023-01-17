@@ -4,10 +4,18 @@ import { Navbar, Text, Button } from "@nextui-org/react";
 import { signOut } from "firebase/auth";
 import { auth } from "../api/firebase";
 import { userContext } from '../App';
+import { Switch, changeTheme, useTheme } from '@nextui-org/react'
 
 const Header = () => {
     const { setUserName, showButton, setShowButton, setUserLoggedIn } = useContext(userContext);
     const navigate = useNavigate();
+    const { isDark } = useTheme();
+
+    const handleChangeTheme = () => {
+        const nextTheme = isDark ? 'light' : 'dark';
+        window.localStorage.setItem('data-theme', nextTheme); // you can use any storage
+        changeTheme(nextTheme);
+    }
     const handleLogout = () => {
         signOut(auth).then(() => {
             navigate("/");
@@ -21,19 +29,19 @@ const Header = () => {
     }
 
     return (
-        <Navbar isBordered variant="sticky">
+        <Navbar isCompact isBordered variant="sticky">
             <Navbar.Brand>
                 <Text h2>
                     Livify Q&A
                 </Text>
             </Navbar.Brand>
             <Navbar.Content>
+                <Navbar.Link href="/about"> About </Navbar.Link>
                 <Navbar.Link href="/#"> Dashboard </Navbar.Link>
                 <Navbar.Link
                     href="/eventlog"
                     style={{ display: showButton ? 'none' : 'block' }}
                 > Event Log </Navbar.Link>
-                <Navbar.Link href="/about"> About </Navbar.Link>
             </Navbar.Content>
             <Navbar.Content>
                 <Navbar.Item>
@@ -56,6 +64,12 @@ const Header = () => {
                         onPress={handleLogout}>
                         Sign out
                     </Button>
+                </Navbar.Item>
+                <Navbar.Item>
+                    <Switch
+                        checked={isDark}
+                        onChange={handleChangeTheme}
+                    />
                 </Navbar.Item>
             </Navbar.Content>
         </Navbar>

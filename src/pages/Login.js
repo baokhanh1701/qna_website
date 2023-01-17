@@ -3,13 +3,13 @@ import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 
 import { auth } from '../api/firebase';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { userContext } from '../App';
-import { Button, Container } from '@nextui-org/react';
+import { Button, Container, Spacer, Text } from '@nextui-org/react';
 
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { setUserName, showButton, setShowButton, setUserLoggedIn } = useContext(userContext);
+    const { setUserName, showButton, setShowButton, setUserLoggedIn, isDark } = useContext(userContext);
 
     const onLogin = (e) => {
         e.preventDefault();
@@ -19,10 +19,10 @@ const Login = () => {
                 const user = userCredential.user;
                 console.log(user);
                 setShowButton(false);
-                
+
                 localStorage.setItem("userLoggedIn", user);
                 setUserLoggedIn(user);
-                setUserName("User");                
+                setUserName("User");
                 navigate("/");
             })
             .catch((error) => {
@@ -69,12 +69,28 @@ const Login = () => {
     }
 
     return (
-        <Container align="center">
+        <Container align="center"
+        style={!isDark ? {
+            backgroundImage: `url(${"https://images.pexels.com/photos/509922/pexels-photo-509922.jpeg"})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment:"fixed"
+        } : {
+            backgroundImage: `url(${"https://images.unsplash.com/photo-1516575355332-d2934104e253?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment:"fixed"
+        }}>
+            <Spacer />
+            <Text h1> Login </Text>
             <form>
                 <div>
                     <label htmlFor="email-address">
                         Email address
                     </label>
+                    <Spacer x={5} />
                     <input
                         id="email-address"
                         name="email"
@@ -84,10 +100,12 @@ const Login = () => {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
+                <Spacer />
                 <div>
                     <label htmlFor="password">
                         Password
                     </label>
+                    <Spacer x={5} />
                     <input
                         id="password"
                         name="password"
@@ -97,6 +115,7 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
+                <Spacer />
                 <div>
                     <button
                         onClick={onLogin}
@@ -115,6 +134,7 @@ const Login = () => {
             <Button onPress={signInWithGoogle}>
                 Sign up with google
             </Button>
+            <Spacer />
         </Container>
     )
 }

@@ -13,11 +13,12 @@ const QuestionBox = () => {
             //     "question": "Quis corrupti alias natus sed consectetur. Doloribus excepturi accusamus doloremque porro maxime labore delectus aspernatur. Officia cupiditate veritatis. Fuga cupiditate officiis vel modi numquam delectus cumque vero porro. Recusandae necessitatibus magni autem at error doloremque voluptatum nulla odit. Consequatur ex nesciunt ipsam harum eligendi necessitatibus iure quas temporibus.",
             //     "id": "1"
             // }
-            <Card isHoverable isPressable css={{
+            <Card css={{
                 p: "$1",
                 mw: "700px",
                 m: "$5"
-            }}>
+            }}
+            data-aos="fade-right">
                 <Card.Header>
                     <img
                         alt="nextui logo"

@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../api/firebase";
+import { Spacer, Text } from '@nextui-org/react';
+import { useContext } from 'react';
+import { userContext } from '../App';
 
 const SignUp = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { isDark } = useContext(userContext);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -25,54 +29,68 @@ const SignUp = () => {
     };
 
     return (
-        <section>
+        <section
+        style={!isDark ? {
+            backgroundImage: `url(${"https://images.pexels.com/photos/509922/pexels-photo-509922.jpeg"})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment:"fixed"
+        } : {
+            backgroundImage: `url(${"https://images.unsplash.com/photo-1516575355332-d2934104e253?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment:"fixed"
+        }}>
             <div>
-                <div>
-                    <form>
-                        <div>
-                            <label htmlFor="email-address">
-                                Email address
-                            </label>
-                            <input
-                                type="email"
-                                label="Email address"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                                placeholder="Email address"
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="password">
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                label="Create password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                                placeholder="Password"
-                            />
-                        </div>
-
-                        <button
-                            type="submit"
-                            onClick={onSubmit}
-                        >
-                            Sign up
-                        </button>
-
-                    </form>
-
-                    <p>
-                        Already have an account?{' '}
-                        <NavLink to="/login" >
-                            Sign in
-                        </NavLink>
-                    </p>
-                </div>
+                <Spacer />
+                <Text h1> Sign Up </Text>
+                <form>
+                    <Spacer />
+                    <div>
+                        <label htmlFor="email-address">
+                            Email address
+                        </label>
+                        <Spacer x={5} />
+                        <input
+                            type="email"
+                            label="Email address"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            placeholder="Email address"
+                        />
+                    </div>
+                    <Spacer />
+                    <div>
+                        <label htmlFor="password">
+                            Password
+                        </label>
+                        <Spacer x={5} />
+                        <input
+                            type="password"
+                            label="Create password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            placeholder="Password"
+                        />
+                    </div>
+                    <Spacer />
+                    <button
+                        type="submit"
+                        onClick={onSubmit}
+                    >
+                        Sign up
+                    </button>
+                </form>
+                <p>
+                    Already have an account?{' '}
+                    <NavLink to="/login" >
+                        Sign in
+                    </NavLink>
+                </p>
             </div>
         </section>
     )

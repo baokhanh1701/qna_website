@@ -1,6 +1,6 @@
 const Footer = () => {
     return (
-        <footer className="bg-dark text-center text-white" id="footer">
+        <div className="bg-dark text-center text-white absolute-bottom" id="footer">
             <div className="container p-4">
                 <section className="">
                     <form className="">
@@ -27,7 +27,7 @@ const Footer = () => {
                 </section>
 
             </div>
-        </footer>
+        </div>
     )
 }
 

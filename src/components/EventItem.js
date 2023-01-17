@@ -7,7 +7,7 @@ const EventItem = (props) => {
     const navigate = useNavigate();
     const EventCard = ({ eventData }) => {
         return (
-            <Card isHoverable css={{ w: "auto", h: "400px" }}>
+            <Card css={{ w: "auto", h: "400px" }} showSkeleton>
                 <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
                     <Col>
                         <Text
@@ -58,7 +58,7 @@ const EventItem = (props) => {
                         </Col>
                         <Col>
                             <Row justify="flex-end">
-                                <Button flat auto rounded color="secondary" onPress={()=> {
+                                <Button flat auto rounded color="secondary" onPress={() => {
                                     navigate(`event/${eventData.id}`);
                                 }}>
                                     <Text

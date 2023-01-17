@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Container, Text, Image, Button, Modal } from "@nextui-org/react";
+import React, { useState, useContext } from "react";
+import { Container, Text, Image, Button, Modal, Spacer, Col, Grid, Table } from "@nextui-org/react";
 import { useParams } from "react-router-dom";
 import { useGetOneEvent } from "../hooks/useLivify";
 import { gapi } from "gapi-script";
 import EventCalendar from "../components/EventCalendar";
+import { userContext } from "../App";
 
 const EventInfo = () => {
     // {
@@ -17,6 +18,8 @@ const EventInfo = () => {
     //     "img": "https://loremflickr.com/640/480/fashion",
     //     "id": "1"
     //    }
+    const {isDark, setIsDark} = useContext(userContext);
+
     const { id } = useParams();
     const [isVisible, setIsVisible] = useState(false);
     const { event, loading } = useGetOneEvent(id);
@@ -109,57 +112,185 @@ const EventInfo = () => {
     //     gapi.load("client", initiate);
     // };
 
+
+    // {
+    //     "name": "Digitized neutral capacity",
+    //     "date": "2081-04-24T21:21:32.459Z",
+    //     "location": "Mortimer River",
+    //     "description": "Sed odit libero pariatur iure ducimus necessitatibus nam laborum eaque. Alias facere inventore. Sapiente cupiditate eos explicabo aliquid aspernatur.\nMagni voluptate consequatur suscipit fuga est nam. Delectus soluta enim fugiat ex ipsa soluta. Eos modi unde provident deleniti quisquam suscipit eligendi. Harum ipsa facilis labore est voluptatibus magni. Magnam dolore ratione quae inventore rerum ex corrupti.\nTenetur esse praesentium. Possimus soluta id ipsa nesciunt ea accusamus. Maxime minus numquam vero magni corporis.",
+    //     "isLive": true,
+    //     "numberOfAttendee": 13178,
+    //     "host": "Wisoky LLC",
+    //     "img": "https://loremflickr.com/640/480/cats",
+    //     "speaker": "Jerome Hegmann",
+    //     "id": "1"
+    //    },
+
+    const dateConvert = event?.date;
+    // const dateStr = dateConvert.slice(0, 10);
+    // const timeStr = dateConvert.slice(11, 16);
     return (
-        <Container md>
-            <Image
-                src={event?.img}
-                objectFit="cover"
-                width={300}
-            />
-            <Text h2> E: {event?.name}</Text>
-            <Text h4> Description: {event?.description}</Text>
-            <Button onPress={() => setIsVisible(true)}>Trailer</Button>
-            <Modal
-                closeButton
-                blur
-                width="650px"
-                aria-labelledby="modal-title"
-                open={isVisible}
-                onClose={() => setIsVisible(false)}
-            >
-                <Modal.Header>
-                    <Text>PROMOTE VIDEO: {event?.name}</Text>
-                </Modal.Header>
-                <Modal.Body>
-                    <iframe
-                        width="560"
-                        height="315"
-                        src={randomVideoUrl}
-                        title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                    ></iframe>
-                    <iframe src="https://calendar.google.com/calendar/embed?src=knguyenkieubao%40gmail.com&ctz=Asia%2FHo_Chi_Minh" width="800" height="600"></iframe>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button color="error" onPress={() => setIsVisible(false)}>
-                        Cancel
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-            <ul>
-                {events?.map((event) => (
-                    <li key={event.id} className="flex justify-center">
-                        <EventCalendar description={event.summary} />
-                    </li>
-                ))}
-            </ul>
-            <Button 
-            // onPress={addEvent(calendarID, eventExample)}
-            >
-                Add to your Calendar
-            </Button>
-        </Container>)
+        <Container
+            align="center"
+            style={!isDark ? {
+                backgroundImage: `url(${"https://images.pexels.com/photos/509922/pexels-photo-509922.jpeg"})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+            } : {backgroundColor: "black"}}>                
+            <Container align="center">
+                <Text h1 css={{
+                    textGradient: "45deg, $purple600 -20%, $pink600 100%",
+                }}
+                    weight="bold"> {event?.name}</Text>
+                <Text
+                            weight="bold"
+                            transform="uppercase"
+                            color="#ffffffAA"
+                            css={{ color: event.isLive ? "$green500" : "$red600" }}
+                        h4>
+                            {event.isLive ? "⦿ Online" : "⦿ Offline"}
+                        </Text>
+                <Image
+                    showSkeleton
+                    maxDelay={1500}
+                    src={event?.img}
+                    objectFit="cover"
+                    width={300}
+                    height={300}
+                />
+                <Grid.Container gap={2} align="center">
+                    <Grid>
+                        <Text h3> Description</Text>
+                        <Text p> {event?.description} </Text>
+                    </Grid>
+                    {/* <Grid>
+                        <Text h4>Date:
+                            <Text p></Text>
+                            {event?.date.slice(0, 10)}
+                        </Text>
+                    </Grid>
+                    <Grid>
+                        <Text h4>Time: {event?.date.slice(11, 16)} </Text>
+                    </Grid> */}
+                </Grid.Container>
+                <Text h3> Event Information</Text>
+                <Text h5> General</Text>
+                <Table
+                    bordered
+                    hoverable
+                    shadow={true}
+                    aria-label="Example static bordered collection table"
+                    css={{
+                        height: "auto",
+                        minWidth: "100%",
+                    }}
+                >
+                    <Table.Header>
+                        <Table.Column>DATE</Table.Column>
+                        <Table.Column>TIME</Table.Column>
+                        <Table.Column>NUMBER OF PARTICIPANTS</Table.Column>
+                    </Table.Header>
+                    <Table.Body>
+                        <Table.Row key="1">
+                            <Table.Cell>                            
+                                {dateConvert}
+                            </Table.Cell>
+                            <Table.Cell>{dateConvert}</Table.Cell>
+                            <Table.Cell>{event?.numberOfAttendee}</Table.Cell>
+                        </Table.Row>
+                    </Table.Body>
+                </Table>
+
+
+
+                <Spacer />
+                <Text h5>Invited and Organized by: </Text>
+                <Table
+                    bordered
+                    hoverable
+                    shadow={true}
+                    aria-label="Example static bordered collection table"
+                    css={{
+                        height: "auto",
+                        minWidth: "100%",
+                    }}
+                >
+                    <Table.Header>
+                        <Table.Column>NAME</Table.Column>
+                        <Table.Column>ROLE</Table.Column>
+                        <Table.Column>ORGANIZATION</Table.Column>
+                    </Table.Header>
+                    <Table.Body>
+                        <Table.Row key="1">
+                            <Table.Cell>{event?.speaker}</Table.Cell>
+                            <Table.Cell>Speaker</Table.Cell>
+                            <Table.Cell>Company</Table.Cell>
+                        </Table.Row>
+                        <Table.Row key="2">
+                            <Table.Cell>Zoey Lang</Table.Cell>
+                            <Table.Cell>Host</Table.Cell>
+                            <Table.Cell>{event?.host}</Table.Cell>
+                        </Table.Row>
+                        <Table.Row key="3">
+                            <Table.Cell>Jane Fisher</Table.Cell>
+                            <Table.Cell>Organizer</Table.Cell>
+                            <Table.Cell>{event?.host}</Table.Cell>
+                        </Table.Row>
+                        <Table.Row key="4">
+                            <Table.Cell>William Howard</Table.Cell>
+                            <Table.Cell>Technician</Table.Cell>
+                            <Table.Cell>{event?.host}</Table.Cell>
+                        </Table.Row>
+                    </Table.Body>
+                </Table>
+                <Spacer />
+                <Button onPress={() => setIsVisible(true)}>Trailer</Button>
+                <Spacer />
+                <Button
+                // onPress={addEvent(calendarID, eventExample)}
+                >
+                    Add to your Calendar
+                </Button>
+                <Modal
+                    closeButton
+                    blur
+                    width="650px"
+                    aria-labelledby="modal-title"
+                    open={isVisible}
+                    onClose={() => setIsVisible(false)}
+                >
+                    <Modal.Header>
+                        <Text h3>PROMOTE VIDEO: {event?.name}</Text>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <iframe
+                            width="560"
+                            height="315"
+                            src={randomVideoUrl}
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                        ></iframe>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button color="error" onPress={() => setIsVisible(false)}>
+                            Cancel
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                <ul>
+                    {events?.map((event) => (
+                        <li key={event.id} className="flex justify-center">
+                            <EventCalendar description={event.summary} />
+                        </li>
+                    ))}
+                </ul>
+                <Spacer />
+                {/* <iframe src="https://calendar.google.com/calendar/embed?src=knguyenkieubao%40gmail.com&ctz=Asia%2FHo_Chi_Minh" width="auto" height="400"></iframe> */}
+            </Container>
+        </Container>
+    )
 }
 export default EventInfo;
