@@ -29,7 +29,7 @@ const Header = () => {
     }
 
     return (
-        <Navbar isCompact isBordered variant="sticky">
+        <Navbar isCompact isBordered variant="floating" fluid>
             <Navbar.Brand>
                 <Text h2>
                     Livify Q&A
