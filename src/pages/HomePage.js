@@ -30,6 +30,7 @@ const HomePage = () => {
     //     });
     // }, []);
     const [question, setQuestion] = useState("");
+    const [ifAnon, setIfAnon] = useState(false);
 
     AOS.init({
         // Global settings:
@@ -54,8 +55,13 @@ const HomePage = () => {
 
     });
 
+    const AskQuestion = (question, ifAnon) => {
+        usePostQnA(question, ifAnon);
+        console.log(question);
+    }
+
     return (
-        <Container align="center" style={!isDark ? {
+        <Container fluid align="center" style={!isDark ? {
             backgroundImage: `url(${"https://images.pexels.com/photos/509922/pexels-photo-509922.jpeg"})`,
             backgroundPosition: 'center',
             backgroundSize: 'cover',
@@ -112,10 +118,10 @@ const HomePage = () => {
                         data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="1500"
                     />
                     <Spacer x={12} />
-                    <Checkbox color="primary" labelColor="primary" style={{ margin: "10px" }} >
+                    <Checkbox color="primary" labelColor="primary" style={{ margin: "10px" }}>
                         Ask anonymously
                     </Checkbox>
-                    <Button color="success"
+                    <Button color="success" onPress={AskQuestion}
                     >
                         Ask!
                     </Button>

@@ -69,7 +69,7 @@ const Login = () => {
     }
 
     return (
-        <Container align="center"
+        <Container fluid align="center"
         style={!isDark ? {
             backgroundImage: `url(${"https://images.pexels.com/photos/509922/pexels-photo-509922.jpeg"})`,
             backgroundPosition: 'center',

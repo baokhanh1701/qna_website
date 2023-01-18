@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../api/firebase";
-import { Spacer, Text } from '@nextui-org/react';
+import { Spacer, Text, Container } from '@nextui-org/react';
 import { useContext } from 'react';
 import { userContext } from '../App';
 
@@ -29,7 +29,7 @@ const SignUp = () => {
     };
 
     return (
-        <section
+        <Container fluid
         style={!isDark ? {
             backgroundImage: `url(${"https://images.pexels.com/photos/509922/pexels-photo-509922.jpeg"})`,
             backgroundPosition: 'center',
@@ -92,7 +92,7 @@ const SignUp = () => {
                     </NavLink>
                 </p>
             </div>
-        </section>
+        </Container>
     )
 }
 

@@ -74,7 +74,6 @@ export const usePostQnA = (question, ifAnon) => {
     //     "id": "1"
     //    }
     const [questionId, setQuestionId] = useState(null);
-
     useEffect(() => {
         const qnaObject = {
             name: `${ifAnon ? "Anonymous_User" : "User"}`,
