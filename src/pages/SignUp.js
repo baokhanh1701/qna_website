@@ -29,20 +29,21 @@ const SignUp = () => {
     };
 
     return (
-        <Container fluid
-        style={!isDark ? {
-            backgroundImage: `url(${"https://images.pexels.com/photos/509922/pexels-photo-509922.jpeg"})`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment:"fixed"
-        } : {
-            backgroundImage: `url(${"https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"})`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment:"fixed"
-        }}>
+        <Container xl
+            style={!isDark ? {
+                backgroundImage: `url(${"https://images.pexels.com/photos/509922/pexels-photo-509922.jpeg"})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundAttachment: "fixed"
+            } : {
+                backgroundImage: `url(${"https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundAttachment: "fixed"
+            }}
+            css={isDark ? { color: '$white' } : { color: '$black' }}>
             <div>
                 <Spacer />
                 <Text h1> Sign Up </Text>

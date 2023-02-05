@@ -130,7 +130,7 @@ const EventInfo = () => {
     // const dateStr = dateConvert.slice(0, 10);
     // const timeStr = dateConvert.slice(11, 16);
     return (
-        <Container
+        <Container xl
             align="center"
             style={!isDark ? {
                 backgroundImage: `url(${"https://images.pexels.com/photos/509922/pexels-photo-509922.jpeg"})`,

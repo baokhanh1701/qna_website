@@ -4,6 +4,7 @@ import { auth } from '../api/firebase';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { userContext } from '../App';
 import { Button, Container, Spacer, Text } from '@nextui-org/react';
+import Swal from 'sweetalert2'
 
 const Login = () => {
     const navigate = useNavigate();
@@ -19,7 +20,6 @@ const Login = () => {
                 const user = userCredential.user;
                 console.log(user);
                 setShowButton(false);
-
                 localStorage.setItem("userLoggedIn", user);
                 setUserLoggedIn(user);
                 setUserName("User");
@@ -31,6 +31,12 @@ const Login = () => {
                 console.log(errorCode, errorMessage);
                 setShowButton(false);
                 setUserName("Guest");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Wrong email or password!',
+                    footer: '<a href="">Forgot your password?</a>'
+                })
             });
     }
 
@@ -48,8 +54,6 @@ const Login = () => {
                 console.log(user);
                 setShowButton(false);
                 setUserName(user.displayName);
-                console.log(showButton);
-
                 localStorage.setItem('userLoggedIn', user);
                 setUserLoggedIn(user);
                 navigate("/");
@@ -64,25 +68,30 @@ const Login = () => {
                 // ...
                 console.log("User logged out due to error: ", errorMessage, errorCode);
                 setUserName("Guest");
-
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                })
             })
     }
 
     return (
-        <Container fluid align="center"
-        style={!isDark ? {
-            backgroundImage: `url(${"https://images.pexels.com/photos/509922/pexels-photo-509922.jpeg"})`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment:"fixed"
-        } : {
-            backgroundImage: `url(${"https://images.unsplash.com/photo-1516575355332-d2934104e253?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"})`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment:"fixed"
-        }}>
+        <Container xl align="center"
+            style={!isDark ? {
+                backgroundImage: `url(${"https://images.pexels.com/photos/509922/pexels-photo-509922.jpeg"})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundAttachment: "fixed"
+            } : {
+                backgroundImage: `url(${"https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundAttachment: "fixed"
+            }}
+            css={isDark ? { color: '$white' } : { color: '$black' }}>
             <Spacer />
             <Text h1> Login </Text>
             <form>
@@ -125,7 +134,7 @@ const Login = () => {
                 </div>
             </form>
 
-            <p className="text-sm text-black text-center">
+            <p className="text-sm text-center">
                 No account yet? {' '}
                 <NavLink to="/signup">
                     Sign up

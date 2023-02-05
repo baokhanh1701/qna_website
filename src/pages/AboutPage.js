@@ -1,28 +1,46 @@
-import { Container, Text, Grid, Card, Row } from "@nextui-org/react";
-import AboutAbout from "../components/About_About";
-import OverviewAbout from "../components/Overview_About";
-import ContactAbout from "../components/Contact_About";
 import AOS from 'aos';
 import "../App.css";
 import 'aos/dist/aos.css';
 import { useContext } from "react";
 import { userContext } from "../App";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AboutPage = () => {
     const { isDark } = useContext(userContext);
-    const DevList = [
-        {
-            name: "Nguyen Kieu Bao Khanh",
-            img: "/img/Einkaufswagen_(24140951728).jpg",
-            describe: "Nguyen Kieu Bao Khanh",
-        },
-        {
-            name: "Pham Tri Nhan",
-            img: "/img/Nguyễn Kiều Bảo Khánh.jpg",
-            describe: "Pham Tri Nhan",
-        }
-    ]
-    AOS.init();
+    // const DevList = [
+    //     {
+    //         name: "Nguyen Kieu Bao Khanh",
+    //         img: "/img/Einkaufswagen_(24140951728).jpg",
+    //         describe: "Nguyen Kieu Bao Khanh",
+    //     },
+    //     {
+    //         name: "Pham Tri Nhan",
+    //         img: "/img/Nguyễn Kiều Bảo Khánh.jpg",
+    //         describe: "Pham Tri Nhan",
+    //     }
+    // ]
+    AOS.init({
+        // Global settings:
+        disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+        startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
+        initClassName: 'aos-init', // class applied after initialization
+        animatedClassName: 'aos-animate', // class applied on animation
+        useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
+        disableMutationObserver: false, // disables automatic mutations' detections (advanced)
+        debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
+        throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+
+
+        // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
+        offset: 120, // offset (in px) from the original trigger point
+        delay: 0, // values from 0 to 3000, with step 50ms
+        duration: 400, // values from 0 to 3000, with step 50ms
+        easing: 'ease', // default easing for AOS animations
+        once: true, // whether animation should happen only once - while scrolling down
+        mirror: false, // whether elements should animate out while scrolling past them
+        anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
+
+    });
     return (
         <div style={!isDark ? {
             backgroundImage: `url(${"https://images.pexels.com/photos/509922/pexels-photo-509922.jpeg"})`,
@@ -37,33 +55,6 @@ const AboutPage = () => {
             backgroundRepeat: 'no-repeat',
             backgroundAttachment:"fixed"
         }}>
-            {/* <OverviewAbout />
-            <AboutAbout />
-            <Grid.Container gap={2} justify="flex-start">
-                {DevList.map((item, index) => (
-                    <Grid md={3} sm={4} xs={6} key={index}>
-                        <Card isPressable>
-                            <Card.Body css={{ p: 0 }}>
-                                <Card.Image
-                                    src={item.img}
-                                    objectFit="cover"
-                                    width="100%"
-                                    height={140}
-                                    alt={item.name}
-                                />
-                            </Card.Body>
-                            <Card.Footer css={{ justifyItems: "flex-start" }}>
-                                <Row wrap="wrap" justify="space-between" align="center">
-                                    <Text b>{item.name}</Text>
-                                    <Text css={{ color: "$accents7", fontWeight: "$semibold", fontSize: "$sm" }}>
-                                        {item.describe}
-                                    </Text>
-                                </Row>
-                            </Card.Footer>
-                        </Card>
-                    </Grid>
-                ))}
-            </Grid.Container> */}
             <div>
                 <div>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

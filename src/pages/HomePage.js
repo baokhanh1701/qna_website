@@ -1,18 +1,15 @@
-import { Container, Text, Button, Spacer, Textarea, Row, Col, Checkbox, NextUIProvider, Switch, changeTheme, useTheme } from "@nextui-org/react";
-import React, { useContext, useState, useEffect } from 'react';
+import { Container, Text, Button, Spacer, Textarea, Row, Col, Checkbox } from "@nextui-org/react";
+import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router";
 import { userContext } from "../App";
 import QuestionBox from "../components/QuestionBox"
 import { usePostQnA } from "../hooks/useLivify";
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
-import { createTheme, getDocumentTheme } from "@nextui-org/react";
-import { Next } from "react-bootstrap/esm/PageItem";
-// ..
 
 const HomePage = () => {
     const navigate = useNavigate();
-    const { username, showButton, isDark } = useContext(userContext);
+    const { showButton, isDark } = useContext(userContext);
     // useEffect(() => {
     //     onAuthStateChanged(auth, (user) => {
     //         if (user) {
@@ -30,7 +27,6 @@ const HomePage = () => {
     //     });
     // }, []);
     const [question, setQuestion] = useState("");
-    const [ifAnon, setIfAnon] = useState(false);
 
     AOS.init({
         // Global settings:
@@ -61,23 +57,26 @@ const HomePage = () => {
     }
 
     return (
-        <Container fluid align="center" style={!isDark ? {
+        <Container xl align="center" style={!isDark ? {
             backgroundImage: `url(${"https://images.pexels.com/photos/509922/pexels-photo-509922.jpeg"})`,
             backgroundPosition: 'center',
-            backgroundSize: 'cover',
+            backgroundSize: '100% 100%',
             backgroundRepeat: 'no-repeat',
-            backgroundAttachment: "fixed"
+            backgroundAttachment: "fixed",
         } : {
-            backgroundImage: `url(${"https://images.unsplash.com/photo-1516575355332-d2934104e253?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"})`,
+            backgroundImage: `url(${"https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"})`,
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundAttachment: "fixed"
-        }}>
-            <Text h1> Home </Text>
+        }}
+            css={isDark ? { color: '$white' } : { color: '$black' }}>
+            <Text h1 css={isDark ? { color: '$white' } : { color: '$black' }}> Home </Text>
             Welcome to your Dashboard!
             <Container
-                style={{ display: showButton ? 'block' : 'none' }}
+                style={{
+                    display: showButton ? 'block' : 'none',
+                }}
                 className="dashBoard">
                 {/* Not Logged In */}
                 Please sign in to use our services.
